@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT CONSEILS | Expertise Financière & Judiciaire</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #051126 0%, #004a99 100%);
+            --deep-blue: #051126;
+            --secondary-color: #c5a059;
+            --vivid-gold: #ffc107;
+            --accent-blue: #00d4ff;
+            --text-dark: #1a1a1a;
+            --bg-light: #ffffff;
+            --bg-gray: #f4f7f6;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); overflow-x: hidden; background-color: var(--bg-light); line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Navigation */
+        nav {
+            background: rgba(5, 17, 38, 0.95); backdrop-filter: blur(10px);
+            color: white; padding: 0.8rem 5%; display: flex; justify-content: space-between;
+            align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .logo-box { 
+            background: var(--secondary-color); color: var(--deep-blue); 
+            width: 45px; height: 45px; display: flex; align-items: center; 
+            justify-content: center; font-weight: 800; border-radius: 8px; font-size: 1.4rem;
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+        }
+        .logo-text .brand { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; display: block; }
+        .logo-text .subtext { font-size: 0.6rem; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 2px; }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; transition: var(--transition); position: relative; }
+        .nav-links a:hover { color: var(--vivid-gold); }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background: var(--vivid-gold); transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Hero */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(5, 17, 38, 0.8), rgba(5, 17, 38, 0.6)), 
+                        url('https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 5%;
+        }
+        .hero h1 { font-size: 4rem; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 2px; line-height: 1.1; }
+        .hero h1 span { color: var(--vivid-gold); border-bottom: 5px solid var(--secondary-color); }
+        .hero p { font-size: 1.4rem; max-width: 800px; margin-bottom: 40px; font-weight: 300; }
+
+        .cta-btn {
+            background: var(--secondary-color); color: var(--deep-blue); padding: 18px 45px;
+            border-radius: 50px; font-weight: 800; text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: var(--transition);
+            border: none; cursor: pointer; display: inline-block; letter-spacing: 1px;
+        }
+        .cta-btn:hover { transform: scale(1.05) translateY(-5px); background: white; box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4); }
+
+        /* Sections */
+        section { padding: 100px 10%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.8rem; color: var(--deep-blue); text-transform: uppercase; }
+        .bar { width: 80px; height: 6px; background: var(--secondary-color); border-radius: 10px; margin: 15px auto; }
+
+        /* About */
+        .about-container { display: flex; gap: 60px; align-items: center; flex-wrap: wrap; }
+        .about-text { flex: 1; min-width: 300px; }
+        .qr-card { 
+            flex: 0.8; background: white; padding: 30px; border-radius: 20px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; border: 1px solid #eee;
+        }
+
+        /* Direction */
+        .dg-section { background: var(--bg-gray); }
+        .dg-card {
+            display: flex; align-items: center; gap: 60px; background: white;
+            padding: 50px; border-radius: 30px; border-left: 15px solid var(--secondary-color);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1); flex-wrap: wrap;
+        }
+        .dg-photo { 
+            width: 350px; height: 450px; border-radius: 20px; 
+            object-fit: cover; transition: var(--transition); box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Equipe Section */
+        .team-section { background: var(--primary-gradient); color: white; padding-left: 5%; padding-right: 5%; }
+        .team-category h3 { color: var(--vivid-gold); text-transform: uppercase; margin: 40px 0 30px; border-bottom: 1px solid rgba(255,255,255,0.2); display: inline-block; padding-bottom: 5px; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .member-card { 
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition); text-align: center;
+        }
+        .member-card:hover { background: var(--secondary-color); transform: translateY(-10px); }
+        .member-card:hover h4, .member-card:hover p { color: var(--deep-blue); }
+        .member-photo { width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 15px; border: 3px solid var(--vivid-gold); overflow: hidden; background: #fff; }
+        .member-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Services Grid */
+        .services-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; 
+        }
+        .service-card {
+            background: white; padding: 45px 35px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: var(--transition);
+            position: relative; overflow: hidden; z-index: 1; border-top: 5px solid var(--secondary-color);
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%;
+            background: var(--primary-gradient); transition: 0.5s; z-index: -1;
+        }
+        .service-card:hover::before { width: 100%; }
+        .service-card:hover { color: white; transform: translateY(-10px); }
+        .service-card i { font-size: 3rem; color: var(--deep-blue); margin-bottom: 25px; }
+        .service-card:hover i { color: var(--vivid-gold); }
+
+        /* Section ENEO */
+        .eneo-partnership {
+            background: #f0f7ff; border-radius: 30px; padding: 50px; display: flex;
+            align-items: center; gap: 40px; margin-top: 50px; border: 2px solid #0056b3;
+            flex-wrap: wrap;
+        }
+        .eneo-logo { flex: 0.4; text-align: center; min-width: 200px; }
+        .eneo-logo img { max-width: 180px; }
+        .eneo-info { flex: 1; }
+        .eneo-info h3 { color: #0056b3; margin-bottom: 15px; }
+        .eneo-services-list { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; 
+            list-style: none; margin-top: 20px;
+        }
+        .eneo-services-list li { 
+            background: white; padding: 10px 15px; border-radius: 10px; display: flex; 
+            align-items: center; gap: 10px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: var(--deep-blue);
+        }
+        .eneo-services-list li i { color: #ed1c24; }
+
+        /* --- NOUVEAU DESIGN CONTACT --- */
+        .contact-area { 
+            background: var(--deep-blue); 
+            background-image: radial-gradient(circle at 20% 30%, rgba(0, 74, 153, 0.4) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 70%, rgba(197, 160, 89, 0.1) 0%, transparent 50%);
+            padding: 120px 10%;
+        }
+        .contact-container {
+            max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 0;
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
+            border-radius: 40px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.4);
+        }
+        .contact-info {
+            background: var(--primary-gradient); padding: 60px; color: white;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .contact-info h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--vivid-gold); }
+        .contact-item { 
+            display: flex; align-items: center; gap: 20px; margin-bottom: 30px; 
+            background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px;
+            transition: 0.3s;
+        }
+        .contact-item:hover { background: rgba(255,255,255,0.1); transform: translateX(10px); }
+        .contact-item i { 
+            font-size: 1.5rem; color: var(--vivid-gold); 
+            width: 50px; height: 50px; background: rgba(255,255,255,0.1); 
+            display: flex; align-items: center; justify-content: center; border-radius: 12px;
+        }
+        
+        .contact-form-wrapper { padding: 60px; background: white; }
+        .form-group { position: relative; margin-bottom: 25px; }
+        .form-group i { position: absolute; left: 15px; top: 18px; color: #aaa; transition: 0.3s; }
+        
+        .modern-input { 
+            width: 100%; padding: 15px 15px 15px 45px; border-radius: 15px; 
+            border: 2px solid #eee; outline: none; background: #fdfdfd;
+            font-family: inherit; font-size: 1rem; transition: all 0.3s;
+        }
+        .modern-input:focus { border-color: var(--secondary-color); background: white; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.1); }
+        .modern-input:focus + i { color: var(--secondary-color); }
+
+        .submit-btn {
+            width: 100%; padding: 20px; border-radius: 15px; border: none;
+            background: var(--deep-blue); color: white; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
+            transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .submit-btn:hover { background: var(--secondary-color); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4); }
+        /* ---------------------------------- */
+
+        footer { background: #11214b; color: white; padding: 80px 5% 30px; text-align: center; }
+        .social-icons { display: flex; justify-content: center; gap: 25px; margin: 30px 0; font-size: 1.8rem; }
+        .social-icons a:hover { color: var(--vivid-gold); transform: scale(1.2); transition: 0.3s; }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.5rem; }
+            .dg-card { flex-direction: column; text-align: center; }
+            .contact-container { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+
+        /* --- NOUVEAUX STYLES --- */
+/* Chiffres Clés */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 50px; text-align: center; }
+.stat-item h3 { font-size: 3rem; color: var(--secondary-color); margin-bottom: 10px; }
+
+/* Témoignages */
+.testimonials-slider { display: flex; gap: 30px; overflow-x: auto; padding: 20px 0; scroll-snap-type: x mandatory; }
+.testimonial-card { 
+    min-width: 300px; background: var(--bg-gray); padding: 30px; border-radius: 20px; 
+    scroll-snap-align: start; font-style: italic; border-left: 5px solid var(--secondary-color);
+}
+
+/* FAQ */
+.faq-item { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; cursor: pointer; }
+.faq-question { font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.faq-answer { max-height: 0; overflow: hidden; transition: 0.3s ease-out; opacity: 0; padding-top: 10px; }
+.faq-item.active .faq-answer { max-height: 200px; opacity: 1; }
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366;
+    color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999;
+    z-index: 1000; display: flex; align-items: center; justify-content: center; transition: 0.3s;
+}
+.whatsapp-float:hover { transform: scale(1.1); background-color: #128C7E; color: white; }
+
+/* Lead Magnet */
+.lead-magnet-box {
+    background: var(--primary-gradient); color: white; padding: 40px; border-radius: 20px;
+    text-align: center; margin-top: 60px; border: 2px dashed var(--vivid-gold);
+}
+/* 1. COMPORTEMENT GLOBAL : Empêcher le vide blanc à droite */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Coupe tout ce qui dépasse à droite */
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 992px) {
+    /* 2. PHOTO DE M. TAWEDI : Plus de coupure */
+    .dg-card {
+        flex-direction: column !important; /* On empile pour avoir de la place */
+        padding: 20px !important;
+        align-items: center;
+        width: 100% !important;
+    }
+    .dg-photo {
+        width: 100% !important; /* Prend la largeur du cadre */
+        max-width: 300px;      /* Mais ne devient pas gigantesque */
+        height: auto !important;
+        margin-bottom: 20px;
+    }
+
+    /* 3. CONTACT & FORMULAIRE : Visibilité totale */
+    .contact-container {
+        display: flex !important;
+        flex-direction: column !important; /* Empilement propre */
+        width: 100% !important;
+        border-radius: 20px !important;
+    }
+    .contact-info, .contact-form-wrapper {
+        width: 100% !important; /* Prend tout l'écran, plus de coupure */
+        padding: 30px 15px !important;
+    }
+    .contact-item {
+        gap: 10px !important;
+        padding: 15px !important;
+    }
+
+    /* 4. FAQ : Plus de coupure */
+    #trust > div {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    .testimonial-card, .faq-item {
+        width: 100% !important;
+        min-width: 0 !important; /* Force l'élément à ne pas dépasser */
+    }
+
+    /* RÉGLAGE GÉNÉRAL DES SECTIONS (Pour éviter que le 10% de marge pousse le contenu) */
+    section {
+        padding: 60px 15px !important; /* Marges réduites sur les côtés */
+    }
+    
+    /* Empêcher les éléments trop larges de créer le vide blanc */
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+@media (max-width: 992px) {
+    /* 1. RÉGLAGE DE LA BANDE BLEUE (Nav) */
+    nav {
+        padding: 0.5rem 3% !important; /* On la rend plus fine */
+        position: fixed; /* On s'assure qu'elle ne gêne pas le scroll */
+    }
+    
+    .main-logo {
+        height: 35px !important; /* On réduit un peu le logo pour gagner de la place */
+    }
+
+    /* 2. DÉCALAGE DU HERO (Pour ne plus cacher "Expertise sans limite") */
+    .hero {
+        padding-top: 80px !important; /* On pousse le contenu vers le bas pour qu'il sorte de sous la barre bleue */
+        height: auto !important;
+        min-height: 80vh;
+    }
+
+    /* 3. RÉDUCTION DES GROS TITRES (Pour éviter qu'ils sortent de l'écran) */
+    .hero h1 {
+        font-size: 1.8rem !important; /* "L'Expertise Sans Limite" tiendra sur une ligne ou deux proprement */
+        line-height: 1.2 !important;
+    }
+
+    .section-title h2 {
+        font-size: 1.6rem !important; /* Titres : L'ENTREPRISE, DOMAINES D'EXCELLENCE, etc. */
+        word-wrap: break-word; /* Force le texte à rester dans le cadre */
+        padding: 0 10px;
+    }
+
+    /* 4. AJUSTEMENT DES SOUS-TITRES ET TEXTES */
+    .dg-info h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    .team-category h3 {
+        font-size: 1.2rem !important;
+        display: block; /* Prend toute la largeur */
+        text-align: center;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <nav>
+       <a href="#home" class="logo-container">
+    <img src="LOGO Supprimer un arrière-plan (1).png" alt="RT CONSEILS Logo" class="main-logo">
+</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#about">L'Entreprise</a></li>
+            <li><a href="#dg">Direction</a></li>
+            <li><a href="#team">Équipe</a></li>
+            <li><a href="#services">Expertises</a></li>
+            <li><a href="#eneo">Partenariat ENEO</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1 data-aos="zoom-in">L'Expertise <span>Sans Limite</span></h1>
+        <p data-aos="fade-up" data-aos-delay="200">RT CONSEILS transforme la complexité financière et technique en un levier de croissance sécurisé au Cameroun.</p>
+        <div data-aos="fade-up" data-aos-delay="400">
+            <a href="#contact" class="cta-btn">Démarrer un diagnostic</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-container">
+            <div class="about-text" data-aos="fade-right">
+                <div class="section-title" style="text-align: left; margin-bottom: 30px;">
+                    <h2>L'Entreprise</h2>
+                    <div class="bar" style="margin-left: 0;"></div>
+                </div>
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">Basé à Yaoundé, <strong>RT CONSEILS</strong> est un cabinet pluridisciplinaire spécialisé dans l'étude et l'Expertise financière, Judiciaire, en gestion Comptable et fiscale, en audit et gouvernance .</p>
+                <p>Notre approche combine rigueur académique et pragmatisme de terrain pour garantir la transparence totale de vos flux financiers.</p>
+            </div>
+            <div class="qr-card" data-aos="fade-left">
+                <i class="fas fa-qrcode fa-3x" style="color: var(--secondary-color); margin-bottom: 15px;"></i>
+                <h3>Localisation</h3>
+                <img src="lien localisation de rt.jpg" alt="QR Code" style="margin-top: 15px; border: 8px solid var(--bg-gray); border-radius: 10px;">
+            </div>
+        </div>
+    </section>
+    <section id="stats" style="background: white; padding: 60px 10%;">
+    <div class="stats-grid">
+        <div class="stat-item" data-aos="fade-up">
+            <h3 class="counter" data-target="98">0</h3><p>% de Dossiers Validés</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="counter" data-target="150">0</h3><p>M+ FCFA Recouvrés</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+            <h3 class="counter" data-target="12">0</h3><p>Experts Dédiés</p>
+        </div>
+    </div>
+</section>
+
+    <section class="dg-section" id="dg">
+        <div class="dg-card" data-aos="fade-up">
+            <img src="Dg (2).jpg" alt="M. TAWEDI Robert" class="dg-photo">
+            <div class="dg-info">
+                <h2 style="color: var(--deep-blue); font-size: 2.5rem; margin-bottom: 5px;">M. TAWEDI Robert</h2>
+                <h3 style="color: var(--secondary-color); margin-bottom: 25px;">Directeur Général | Expert Financier</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                    <strong>Expert Financier certifié ONUDI.</strong><br>
+                    Référence incontournable près du <strong>Tribunal Criminel Spécial</strong> et agréé près les Cours d'Appel du Centre, Sud et Est.
+                </p>
+                <div style="display: flex; gap: 30px;">
+                    <div><h3 style="color: var(--secondary-color); font-size: 2rem;">+16</h3><small>Ans d'expérience</small></div>
+                    <div><h3 style="color: var(--secondary-color); font-size: 2rem;">500+</h3><small>Missions réussies</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section" id="team">
+        <div class="section-title" data-aos="fade-up">
+            <h2 style="color: white;">PERSONNELS DE RT CONSEILS</h2>
+            <div class="bar"></div>
+        </div>
+
+        <div class="team-category" data-aos="fade-up">
+            <h3>Personnel Administratif</h3>
+            <div class="team-grid">
+                <div class="member-card">
+                    <div class="member-photo"><img src="https://via.placeholder.com/150" alt=""></div>
+                    <h4>BATOUANEN KENDECK</h4>
+                    <p>Comptable</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo"><img src="patricia 2.jpg" alt=""></div>
+                    <h4>ADZABA ESSOLO</h4>
+                    <p>Comptable</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo"><img src="bijoux.jpg" alt=""></div>
+                    <h4>KOUBEKO Blanche</h4>
+                    <p>Secrétaire</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-category" data-aos="fade-up">
+            <h3>Personnel Technique</h3>
+            <div class="team-grid">
+                <div class="member-card">
+                    <div class="member-photo"><img src="artur 2.jpg" alt=""></div>
+                    <h4>NDONGMBA Arthur</h4>
+                    <p>Directeur Technique</p>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo"><img src="" alt=""></div>
+                    <h4>ETO'O EBALE</h4>
+                    <p>Coordonnateur HSE</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-category" data-aos="fade-up">
+            <h3>Personnel Informatique</h3>
+            <div class="team-grid">
+                <div class="member-card">
+                    <div class="member-photo"><img src="PhotoCV.png" alt=""></div>
+                    <h4>JONGELE Annette</h4>
+                    <p>Gérante du Système Informatique</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Domaines d'Excellence</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-aos="flip-left">
+                <i class="fas fa-chart-line"></i>
+                <h3>ÉTUDES SOCIO-ÉCONOMIQUES</h3>
+                <p>Analyse stratégique des indicateurs de marché pour éclairer la prise de décision et évaluer l'impact des projets sur le tissu local.</p>
+            </div>
+            <div class="service-card" data-aos="flip-left" data-aos-delay="100">
+                <i class="fas fa-project-diagram"></i>
+                <h3>GESTION DE PROJETS</h3>
+                <p>Pilotage intégral de vos initiatives, assurant le respect des délais, des budgets et des standards de qualité internationaux.</p>
+            </div>
+            <div class="service-card" data-aos="flip-left" data-aos-delay="200">
+                <i class="fas fa-calculator"></i>
+                <h3>GESTION COMPTABLE</h3>
+                <p>Accompagnement rigoureux dans la tenue de vos comptes et l'optimisation de vos états financiers selon les normes OHADA.</p>
+            </div>
+            <div class="service-card" data-aos="flip-left" data-aos-delay="300">
+                <i class="fas fa-search-plus"></i>
+                <h3>AUDITS</h3>
+                <p>Examen critique et indépendant de vos procédures pour identifier les risques et certifier la fiabilité de vos informations financières.</p>
+            </div>
+            <div class="service-card" data-aos="flip-left" data-aos-delay="400">
+                <i class="fas fa-balance-scale"></i>
+                <h3>EXPERTISE FINANCIÈRE</h3>
+                <p>Ingénierie financière de haut niveau et assistance spécialisée pour résoudre les problématiques monétaires les plus complexes.</p>
+            </div>
+        </div>
+
+        <div class="eneo-partnership" id="eneo" data-aos="zoom-in">
+            <div class="eneo-logo">
+                <img src="logo eneo.png" alt="Logo ENEO Cameroun">
+            </div>
+            <div class="eneo-info">
+                <h3>Partenaire ENEO Cameroun</h3>
+                <p>RT CONSEILS met son expertise technique au service de l'énergie au Cameroun. En tant que partenaire agréé, nous assurons des prestations de maintenance et de gestion de réseau avec une rigueur professionnelle.</p>
+                <ul class="eneo-services-list">
+                    <li><i class="fas fa-bolt"></i> Relève et Distribution</li>
+                    <li><i class="fas fa-box"></i> Pose de compteurs</li>
+                    <li><i class="fas fa-monument"></i> Pose de poteaux électriques</li>
+                    <li><i class="fas fa-tree"></i> Élagage technique</li>
+                    <li><i class="fas fa-plug"></i> Branchements</li>
+                    <li><i class="fas fa-check-circle"></i> Normalisation</li>
+                    <li><i class="fas fa-broadcast-tower"></i> Construction des lignes MTBT</li>
+                    <li><i class="fas fa-tools"></i> Petites interventions</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+<section id="trust" style="background: var(--bg-gray);">
+    <div class="section-title"><h2>Confiance & Questions</h2><div class="bar"></div></div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; flex-wrap: wrap;">
+        <div>
+            <h3>Paroles de Partenaires</h3>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <p>"Une rigueur exemplaire dans l'audit de nos comptes de distribution."</p>
+                    <small>— Responsable Financier, Yaoundé</small>
+                </div>
+                <div class="testimonial-card">
+                    <p>"RT CONSEILS nous a permis de sécuriser nos investissements grâce à un diagnostic sans complaisance."</p>
+                    <small>— Promoteur, Yaoundé</small>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3>Foire Aux Questions</h3>
+            <div class="faq-item">
+                <div class="faq-question">Quels sont les délais d'expertise ? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Selon la complexité, nos rapports préliminaires sont fournis sous 7 à 15 jours ouvrables.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Intervenez-vous hors de Yaoundé ? <i class="fas fa-plus"></i></div>
+                <div class="faq-answer">Oui, nous couvrons l'ensemble du territoire camerounais et la zone CEMAC.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="lead-magnet-box" data-aos="zoom-in">
+        <h3>🎁 Guide Gratuit 2026</h3>
+        <p>Téléchargez "Les 5 points de contrôle pour réussir votre audit OHADA"</p>
+        <button class="cta-btn" style="margin-top: 20px;">Recevoir par Email</button>
+    </div> -->
+</section>
+    <section class="contact-area" id="contact">
+        <div class="section-title" data-aos="fade-up">
+            <h2 style="color: white;">Parlons de votre projet</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="contact-container" data-aos="zoom-in">
+            <div class="contact-info">
+                <h2>Contact</h2>
+                <p style="margin-bottom: 40px; opacity: 0.8;">Nos experts vous répondent .</p>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <div>
+                        <h4 style="color: var(--vivid-gold);">Siège Social</h4>
+                        <p>Yaoundé, Mvog-Ada, Immeuble Pharmacie, 2e Étage.</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4 style="color: var(--vivid-gold);">Ligne Directe</h4>
+                        <p>+237 6 77 69 33 90</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <div>
+                        <h4 style="color: var(--vivid-gold);">Email</h4>
+                        <p>Cabinetrtconseils@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <!-- <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="modern-input" placeholder="Nom complet ou Entreprise" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" class="modern-input" placeholder="Adresse Email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea rows="5" class="modern-input" style="padding-left: 15px;" placeholder="Détaillez votre besoin ici..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Envoyer la demande</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form> -->
+                <form id="contactForm" action="https://formspree.io/f/mykwvljy" method="POST">
+    
+    <div class="form-group">
+        <input type="text" name="nom" class="modern-input" placeholder="Nom complet ou Entreprise" required>
+        <i class="fas fa-user"></i>
+    </div>
+    
+    <div class="form-group">
+        <input type="email" name="E mail" class="modern-input" placeholder="Adresse Email" required>
+        <i class="fas fa-envelope"></i>
+    </div>
+
+    <div class="form-group">
+        <textarea name="message" rows="5" class="modern-input" style="padding-left: 15px;" placeholder="Détaillez votre besoin ici..." required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">
+        <span>Envoyer la demande</span>
+        <i class="fas fa-paper-plane"></i>
+    </button>
+    
+</form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <img src="LOGO Supprimer un arrière-plan (1).png" alt="RT CONSEILS Logo" class="main-logo">
+        <!-- <h2 style="color: var(--secondary-color);">RT CONSEILS</h2> -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61586595572442"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/in/cabinet-rt-conseils-756623291     "><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://wa.me/237677693390?text=Bonjour%20Monsieur%20TAWEDI,%20je%20souhaiterais%20avoir%20un%20service%20de%20votre%20part."><i class="fab fa-whatsapp"></i></a>
+            <!-- <a href="mailto:Cabinetrtconseils@gmail.com"><i class="fas fa-envelope"></i></a> -->
+             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Cabinetrtconseils@gmail.com" target="_blank">
+    <i class="fas fa-envelope"></i>
+</a>
+        </div>
+        <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 40px;">
+            &copy; 2026 RT CONSEILS - Tous droits réservés. <br>Partenaire ENEO Cameroun.
+        </p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 1. Initialisation des animations au scroll (AOS)
+AOS.init({ duration: 1000, once: true });
+
+// 2. Navigation fluide (Smooth Scroll)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// 3. Gestion du formulaire de contact
+// --- 1. GESTION DU FORMULAIRE (CORRIGÉ POUR FORMSPREE) ---
+const contactForm = document.getElementById('contactForm');
+
+if(contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); // On empêche le rechargement de la page
+        
+        // On récupère les données du formulaire
+        const data = new FormData(this);
+        
+        // ON ENVOIE RÉELLEMENT À FORMSPREE
+        const response = await fetch(this.action, {
+            method: this.method,
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            // Si l'envoi réussit, on affiche ton message et on vide le formulaire
+            alert("✅ Votre demande a été transmise au secrétariat. Nous vous recontacterons sous peu.");
+            this.reset();
+        } else {
+            // Si Formspree renvoie une erreur
+            alert("❌ Erreur lors de l'envoi. Veuillez réessayer.");
+        }
+    });
+}
+
+// --- 2. ANIMATION DES COMPTEURS (Ton code reste identique) ---
+function animateIndividual(el, target, inc) {
+    let current = +el.innerText;
+    if (current < target) {
+        el.innerText = Math.ceil(current + inc);
+        setTimeout(() => animateIndividual(el, target, inc), 20);
+    } else {
+        el.innerText = target;
+    }
+}
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const increment = target / 50; 
+        animateIndividual(counter, target, increment);
+    });
+}
+
+// --- 3. FAQ Toggle (Ton code reste identique) ---
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+        const icon = item.querySelector('i');
+        if(icon) {
+            icon.classList.toggle('fa-plus');
+            icon.classList.toggle('fa-minus');
+        }
+    });
+});
+
+// LANCEMENT AUTOMATIQUE AU CHARGEMENT
+window.addEventListener('DOMContentLoaded', () => {
+    // Petit délai de 300ms pour laisser le temps au navigateur d'afficher la page
+    setTimeout(animateCounters, 300);
+});
+    </script>
+    <a href="https://wa.me/237677693390" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+</body>
+</html>
